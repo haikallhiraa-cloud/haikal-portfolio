@@ -175,7 +175,10 @@ footer{padding:28px 0 40px;text-align:center;font-size:13px;color:var(--mute)}
  body{font-size:15.5px}
  section{padding:56px 0}
  .ncta{display:none}
- .hero{padding:28px 0 48px}
+ .hero{padding:24px 0 36px}
+ .hero .wrap{gap:20px}
+ .hero .rv:first-child{text-align:left}
+ .fact{padding:12px}.fact b{font-size:14px}.fact span{font-size:12px}
  .hero h1{font-size:34px;margin-top:16px}
  .hero p{font-size:16px;margin:14px 0 22px}
  .cta .btn{flex:1;justify-content:center}
@@ -183,10 +186,15 @@ footer{padding:28px 0 40px;text-align:center;font-size:13px;color:var(--mute)}
  .stats>div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 10px}
  .stats b{font-size:22px}
  .stats span{font-size:12px;line-height:1.35;display:block}
- .portrait{max-width:300px;margin-top:8px}
+ .portrait{max-width:210px;order:-1;margin:0 auto}
+ .pframe{border-radius:140px 140px 24px 24px}
  h2{font-size:28px}
  .sub{font-size:15.5px}
- .about .ph{max-width:260px;margin:0 auto;border-radius:20px}
+ .about{gap:18px}
+ .about .ph{width:88px;height:88px;aspect-ratio:1;border-radius:50%;margin:0;box-shadow:0 0 0 4px #fff,0 6px 18px rgba(20,20,40,.12)}
+ .about .ph img{object-position:center 18%;transform:scale(1.35);transform-origin:center 25%}
+ .facts{grid-template-columns:1fr 1fr}
+ .facts .fact:last-child{grid-column:span 2}
  .facts{gap:8px}
  .plist{gap:20px;margin-top:28px}
  .proj{border-radius:20px}
