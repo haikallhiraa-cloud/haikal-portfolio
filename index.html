@@ -119,6 +119,9 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px
 .gal img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .5s}
 .gal figure:hover img{transform:scale(1.04)}
 .gal figcaption{position:absolute;left:10px;bottom:10px;font-size:12px;font-weight:600;color:#fff;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);padding:4px 10px;border-radius:999px}
+.gal.g3{grid-template-columns:1fr 1fr;margin-top:28px}
+.gal.g3 figure,.gal.g3 figure:nth-child(2){grid-column:span 1}
+.gal.g3 figure:nth-child(1){grid-column:span 2}
 @media(max-width:700px){.gal{grid-template-columns:1fr 1fr}.gal figure,.gal figure:nth-child(1),.gal figure:nth-child(2){grid-column:span 1}.gal figure:nth-child(1){grid-column:span 2}}
 /* education + skills */
 .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px)}
@@ -373,12 +376,17 @@ footer{padding:28px 0 40px;text-align:center;font-size:13px;color:var(--mute)}
    <div class="it"><div class="yr">2023 – present</div><h3>Universitas Binawan</h3><p>Bachelor's in Digital Business, with an interest in business development, digital marketing, and organizational management.</p></div>
    <div class="it"><div class="yr">2020 – 2023</div><h3>SMAN 89 Jakarta</h3><p>Active in school activities and event committees.</p></div>
   </div>
+  <div class="gal g3">
+  <figure><img src="img/edu1.jpg" alt="Class photo in SMAN 89 Jakarta uniforms" loading="lazy"><figcaption>SMAN 89 Jakarta</figcaption></figure>
+  <figure><img src="img/edu2.jpg" alt="Class photo at Universitas Binawan in batik attire" loading="lazy"><figcaption>Universitas Binawan</figcaption></figure>
+  <figure><img src="img/edu3.jpg" alt="Group photo with classmates at a campus activity" loading="lazy"><figcaption>Campus activity</figcaption></figure>
+  </div>
  </div>
  <div class="rv">
   <span class="eyebrow">Skills</span>
   <h2>Skills &amp; tools</h2>
   <div class="sgroup"><h3>Soft skills</h3><div class="tags"><span>Communication</span><span>Teamwork</span><span>Leadership</span><span>Time Management</span><span>Problem Solving</span></div></div>
-  <div class="sgroup"><h3>Web development</h3><div class="tags"><span>React.js</span><span>Supabase</span><span>PostgreSQL</span><span>Vercel</span></div></div>
+  <div class="sgroup"><h3>Web development</h3><div class="tags"><span>React.js</span><span>JavaScript</span><span>HTML &amp; CSS</span><span>Responsive / Mobile-first UI</span><span>Supabase</span><span>Supabase Auth</span><span>PostgreSQL</span><span>Role-Based Access Control</span><span>Barcode &amp; QR Scanning</span><span>Label Printing</span><span>Excel &amp; CSV Export</span><span>Push Notifications</span><span>Git &amp; GitHub</span><span>Vercel</span></div></div>
   <div class="sgroup"><h3>Design &amp; productivity</h3><div class="tags"><span>Figma</span><span>Canva</span><span>Microsoft Excel</span><span>Microsoft Word</span><span>Google Docs</span></div></div>
  </div>
 </div></section>
