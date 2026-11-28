@@ -162,13 +162,19 @@ footer{padding:28px 0 40px;text-align:center;font-size:13px;color:var(--mute)}
 .burger[aria-expanded=true] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
 .burger[aria-expanded=true] span:nth-child(2){opacity:0}
 .burger[aria-expanded=true] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-.mmenu{display:none}
+.mmenu,.mback{display:none}
 @media(max-width:820px){
  .burger{display:flex}
- .mmenu{display:grid;max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 max(5vw,18px);background:rgba(255,255,255,.96)}
- .mmenu.on{max-height:420px;padding-bottom:12px}
- .mmenu a{text-decoration:none;font-weight:600;font-size:16px;padding:14px 4px;border-bottom:1px solid var(--line)}
- .mmenu a:last-child{border-bottom:0}
+ .mmenu{display:grid;gap:2px;position:absolute;top:calc(100% + 8px);left:12px;right:12px;padding:10px;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 20px 50px rgba(20,20,40,.16);opacity:0;transform:translateY(-8px) scale(.98);transform-origin:top right;pointer-events:none;visibility:hidden;transition:opacity .22s,transform .22s,visibility 0s .22s}
+ .mmenu.on{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition:opacity .22s,transform .22s}
+ .mmenu a{display:flex;align-items:center;justify-content:space-between;text-decoration:none;font-weight:600;font-size:16px;padding:13px 14px;border-radius:12px;color:var(--ink)}
+ .mmenu a i{font-style:normal;color:var(--mute);opacity:.5;transition:transform .2s,opacity .2s}
+ .mmenu a:hover,.mmenu a:active,.mmenu a.cur{background:var(--accs);color:var(--acc)}
+ .mmenu a:hover i,.mmenu a.cur i{opacity:1;color:var(--acc);transform:translateX(3px)}
+ .mmenu .btn{margin-top:8px;justify-content:center;color:#fff;min-height:50px}
+ .mmenu .btn:hover{background:var(--grad);color:#fff}
+ .mback{display:block;position:fixed;inset:0;z-index:25;background:rgba(20,20,28,.28);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .22s}
+ .mback.on{opacity:1;pointer-events:auto}
 }
 /* phone polish */
 @media(max-width:600px){
@@ -222,13 +228,14 @@ footer{padding:28px 0 40px;text-align:center;font-size:13px;color:var(--mute)}
 </head>
 <body>
 <nav><div class="wrap">
- <a class="logo" href="#top">haikal<span>.</span></a>
+ <a class="logo" href="#top">HaikalHira<span>.</span></a>
  <div class="links"><a href="#about">About</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#certificates">Certificates</a></div>
  <div class="nr"><a class="btn pri ncta" href="#contact">Get in touch</a>
  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
 </div>
-<div class="mmenu" id="mmenu"><a href="#about">About</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#certificates">Certificates</a><a href="#contact">Contact</a></div>
+<div class="mmenu" id="mmenu"><a href="#about">About<i>→</i></a><a href="#projects">Projects<i>→</i></a><a href="#experience">Experience<i>→</i></a><a href="#education">Education<i>→</i></a><a href="#certificates">Certificates<i>→</i></a><a class="btn pri" href="#contact">Get in touch</a></div>
 </nav>
+<div class="mback" id="mback"></div>
 
 <header class="hero" id="top"><div class="wrap">
  <div class="rv">
@@ -424,9 +431,15 @@ footer{padding:28px 0 40px;text-align:center;font-size:13px;color:var(--mute)}
  const close=()=>lb.classList.remove('on');
  lb.addEventListener('click',e=>{if(e.target!==im)close()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
- const bg=document.getElementById('burger'),mm=document.getElementById('mmenu');
- bg.addEventListener('click',()=>{const o=mm.classList.toggle('on');bg.setAttribute('aria-expanded',o);bg.setAttribute('aria-label',o?'Close menu':'Open menu')});
- mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('on');bg.setAttribute('aria-expanded','false')}));
+ const bg=document.getElementById('burger'),mm=document.getElementById('mmenu'),mb=document.getElementById('mback');
+ const setMenu=o=>{mm.classList.toggle('on',o);mb.classList.toggle('on',o);bg.setAttribute('aria-expanded',o);bg.setAttribute('aria-label',o?'Close menu':'Open menu')};
+ bg.addEventListener('click',()=>setMenu(!mm.classList.contains('on')));
+ mb.addEventListener('click',()=>setMenu(false));
+ mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+ const secs=[...document.querySelectorAll('section[id]')],ml=[...mm.querySelectorAll('a:not(.btn)')];
+ const spy=()=>{let cur='';secs.forEach(x=>{if(x.getBoundingClientRect().top<120)cur=x.id});ml.forEach(a=>a.classList.toggle('cur',a.getAttribute('href')==='#'+cur))};
+ addEventListener('scroll',spy,{passive:true});spy();
  const els=document.querySelectorAll('.rv');
  if('IntersectionObserver' in window){
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
